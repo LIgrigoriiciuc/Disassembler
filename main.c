@@ -181,7 +181,7 @@ int main(int argc, char *argv[]) {
             }
             else printf("0x%04lx: rex.w + 0x%02x\n", offset, next);
             }
-        // mov r32, r/m32
+        // mov r/m32, r32
         else if (byte == 0x89) {
             unsigned char modrm;
             read(fd, &modrm, 1);
@@ -190,6 +190,8 @@ int main(int argc, char *argv[]) {
             int rm  = modrm & 0x7;
             printf("0x%04lx: mov %s, %s\n", offset-1, regs32[rm], regs32[reg]);
         }
+
+        // mov r32, r/m32
         else if (byte == 0x8B) {
             unsigned char modrm;
             read(fd, &modrm, 1);
